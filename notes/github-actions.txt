@@ -1,0 +1,17 @@
+main branch
+[pull request]: test 수행
+[push]: build, push, deploy
+
+feature branches
+[push]: test 수행
+
+---
+feature 개발이 끝나면 feature branch에 push를 한다.
+해당 branch에 대해서 test를 수행한다.
+
+main branch에 이 브랜치의 pull request를 신청한다.
+pull request가 받아들여져서 병합되면 main branch에서 push 이벤트가 발생하여 build, push, deploy 작업이 수행된다.
+
+---
+고민
+feature branch push의 test 작업이 main branch의 pull request의 test 작업과 겹치는 것 아닌가?
