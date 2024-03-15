@@ -48,4 +48,4 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd map-reservation
-            sh script/prod-run.sh
+            sh scripts/prod-run.sh
