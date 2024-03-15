@@ -15,3 +15,17 @@ pull request가 받아들여져서 병합되면 main branch에서 push 이벤트
 ---
 고민
 feature branch push의 test 작업이 main branch의 pull request의 test 작업과 겹치는 것 아닌가?
+
+---
+고민
+deploy는 어떻게 할 것인가?
+aws ec2 + docker compose(apiserver + db + frontend)
+
+- 1안
+    - scp-action을 이용하여 배포 스크립트, docker-compose 파일 등을 ec2에 전달
+    - ssh-action을 이용하여 ec2에서 배포 스크립트 실행
+        - 깃헙 액션의 시크릿을 이용해 환경 변수를 설정할 수도 있다.
+    - 장점: 구현이 간편하고 빠르다.
+    - 단점: 너무 생짜?
+- 2안
+    - aws codedeploy

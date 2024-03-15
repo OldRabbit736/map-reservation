@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # build, push steps
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
@@ -26,3 +27,14 @@ jobs:
           file: ./apiserver/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/map-reservation-apiserver:${{ github.sha }}
+
+      # deploy steps
+      - name: Copy script, docker compose files
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "docker-compose-prod.yml"
+          target: "map-reservation"
