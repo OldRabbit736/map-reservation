@@ -2,6 +2,6 @@ version: '3'
 services:
   map-reservation-apiserver:
     build: ./apiserver
-    image: map-reservation-apiserver:0.0.1-compose
+    image: map-reservation-apiserver:latest
     ports:
       - "8080:8080"

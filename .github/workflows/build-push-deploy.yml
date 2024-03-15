@@ -36,5 +36,16 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "docker-compose-prod.yml"
+          source: "docker-compose-prod.yml,scripts/prod-run.sh"
           target: "map-reservation"
+
+      - name: Docker compose up
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd map-reservation
+            sh script/prod-run.sh
