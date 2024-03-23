@@ -1,0 +1,16 @@
+### CSRF 발급
+GET http://localhost:8080/api/csrf-token
+
+> {%
+    client.global.set("csrfToken", response.body.csrfToken.token)
+%}
+
+### 회원가입
+POST http://localhost:8080/api/members
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrfToken}}
+
+{
+  "email": "abc@gmail.com",
+  "password": "12345"
+}
