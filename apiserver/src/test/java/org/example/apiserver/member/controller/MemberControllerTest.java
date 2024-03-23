@@ -2,6 +2,8 @@ package org.example.apiserver.member.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.apiserver.member.dto.MemberCreateRequest;
+import org.example.apiserver.member.repository.MemberRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,13 @@ class MemberControllerTest {
     MockMvc mockMvc;
     @Autowired
     ObjectMapper objectMapper;
+    @Autowired
+    MemberRepository memberRepository;
+
+    @AfterEach
+    void clean() {
+        memberRepository.deleteAll();
+    }
 
     @DisplayName("회원가입 성공")
     @Test
