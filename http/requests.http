@@ -14,3 +14,11 @@ X-CSRF-TOKEN: {{csrfToken}}
   "email": "abc@gmail.com",
   "password": "12345"
 }
+
+### 로그인
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+X-CSRF-TOKEN: {{csrfToken}}
+
+username = abc@gmail.com &
+password = 12345
