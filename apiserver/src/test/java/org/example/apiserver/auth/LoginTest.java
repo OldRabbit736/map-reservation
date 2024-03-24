@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class AuthTest {
+public class LoginTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -89,7 +89,7 @@ public class AuthTest {
     }
 
     private ResultActions performLogin(String email, String password) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        return mockMvc.perform(MockMvcRequestBuilders.post("/api/login")
                 .param("username", email)
                 .param("password", password)
                 .with(csrf())
