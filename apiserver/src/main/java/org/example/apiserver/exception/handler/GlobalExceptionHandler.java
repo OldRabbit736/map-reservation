@@ -24,13 +24,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<CustomErrorResponse<Object>> handleCustomException(CustomException ex) {
         logError(ex);
         ErrorCode errorCode = ex.getErrorCode();
-        return createResponseEntity(errorCode.name(), errorCode.getMessage(), null, errorCode.getHttpStatus());
+        return createResponseEntity(errorCode, null);
     }
 
-    private <T> ResponseEntity<CustomErrorResponse<T>> createResponseEntity(String code, String message, T errors, HttpStatus httpStatus) {
-        CustomErrorResponse<T> customErrorResponse = new CustomErrorResponse<>(code, message, errors);
+    private <T> ResponseEntity<CustomErrorResponse<T>> createResponseEntity(ErrorCode errorCode, T errors) {
+        CustomErrorResponse<T> customErrorResponse = CustomErrorResponse.from(errorCode, errors);
         return ResponseEntity
-                .status(httpStatus)
+                .status(errorCode.getHttpStatus())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(customErrorResponse);
     }

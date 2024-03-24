@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityConfig {
 
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final AuthenticationFailureHandler authenticationFailureHandler;
 
     // SpringDocConfig의 Bean으로부터 받아오는 값
     private final String swaggerPath;
@@ -34,11 +36,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/csrf-token").permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf(Customizer.withDefaults())
+                .csrf(Customizer.withDefaults()) // TODO: CSRF 인증 실패 응답 커스터마이징 하기
                 .formLogin(
                         customizer -> customizer
                                 .loginProcessingUrl("/login")
                                 .successHandler(authenticationSuccessHandler)
+                                .failureHandler(authenticationFailureHandler)
                 );
 
         return http.build();
